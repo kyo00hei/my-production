@@ -54,7 +54,6 @@ class ItemController extends Controller
 
             return redirect('/items');
         }
-
         return view('item.add');
     }
 
@@ -66,7 +65,7 @@ class ItemController extends Controller
         $item = Item::where('id',$request->id)->first();
 
         //editへpostメソッドしたときに編集実行
-        if ($request->isMethod('post')){
+        if ($request->isMethod('put')){
             // バリデーション
             $this->validate($request, [
                 'name' => 'required|max:100',
@@ -82,7 +81,18 @@ class ItemController extends Controller
         }
 
             
-        //編集画面へ
+        //商品編集画面へ
         return view('item.edit',['item'=>$item]);
+    }
+
+    /**
+     * 商品削除機能
+     */
+    public function destroy(Request $request){
+
+        $item = Item::find($request->id);
+        $item->delete();
+
+        return redirect('/items');
     }
 }

@@ -29,6 +29,7 @@
                                 <th>種別</th>
                                 <th>詳細</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,7 +39,16 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->type }}</td>
                                     <td>{{ $item->detail }}</td>
-                                    <td><a href="{{ url('items/edit',$item->id)}}">>>編集</a></td>
+                                    <td>
+                                        <a href="{{ route('edit',$item->id)}}" class="btn btn-primary" >編集</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('destroy' ,$item->id) }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">削除</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
