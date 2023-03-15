@@ -22,6 +22,7 @@
 
             <div class="card card-primary">
                 <form method="POST">
+                    @method('put')
                     @csrf
                     <div class="card-body">
                         <div class="form-group">                            
