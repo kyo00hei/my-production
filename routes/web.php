@@ -25,4 +25,8 @@ Route::prefix('items')->group(function () {
     Route::get('/', [App\Http\Controllers\ItemController::class, 'index']);
     Route::get('/add', [App\Http\Controllers\ItemController::class, 'add']);
     Route::post('/add', [App\Http\Controllers\ItemController::class, 'add']);
+    //編集画面へ
+    Route::get('/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit']);
+    //編集実行
+    Route::post('/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit']);
 });

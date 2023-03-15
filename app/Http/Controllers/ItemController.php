@@ -57,4 +57,32 @@ class ItemController extends Controller
 
         return view('item.add');
     }
+
+    /**
+     * 商品編集
+     */
+    public function edit(Request $request){
+
+        $item = Item::where('id',$request->id)->first();
+
+        //editへpostメソッドしたときに編集実行
+        if ($request->isMethod('post')){
+            // バリデーション
+            $this->validate($request, [
+                'name' => 'required|max:100',
+            ]);
+
+            $item = Item::find($request->id);
+            $item->name = $request->name;
+            $item->type = $request->type;
+            $item->detail = $request->detail;
+            $item->save();
+
+            return redirect('/items');
+        }
+
+            
+        //編集画面へ
+        return view('item.edit',['item'=>$item]);
+    }
 }
