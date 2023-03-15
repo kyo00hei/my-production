@@ -28,6 +28,7 @@
                                 <th>名前</th>
                                 <th>種別</th>
                                 <th>詳細</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,6 +38,7 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->type }}</td>
                                     <td>{{ $item->detail }}</td>
+                                    <td><a href="{{ url('items/edit',$item->id)}}">>>編集</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
