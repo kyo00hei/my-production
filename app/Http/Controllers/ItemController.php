@@ -21,16 +21,26 @@ class ItemController extends Controller
     /**
      * 商品一覧
      */
-    public function index()
+    public function index(Request $request)
     {
         // 商品一覧取得
         $items = Item
             ::where('items.status', 'active')
             ->select()
-            ->get();
+            ->paginate(5);  //ページネーション
+
+        //検索機能
+        if(!empty($request->keyword)){  //keywordがあるとき
+            $items = Item::query()
+            ->where('name','LIKE',"%{$request->keyword}%")
+            ->orWhere('detail','LIKE',"%{$request->keyword}%")
+            ->orWhere('type','LIKE',"%{$request->keyword}%")
+            ->paginate(5);
+        }
 
         return view('item.index', compact('items'));
     }
+
 
     /**
      * 商品登録

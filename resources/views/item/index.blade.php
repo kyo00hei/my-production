@@ -4,6 +4,21 @@
 
 @section('content_header')
     <h1>商品一覧</h1>
+
+    <!--検索フォーム-->
+    <div class="search text-right mb-3">
+        <form action="">
+            <input type="text" name="keyword"  placeholder="商品検索">
+            <button type="submit" class="btn btn-dark">検索</button>
+        </form>
+    </div>
+
+    <!--並び替え-->
+    <select name="narabi">
+        <option value="asc">昇順</option>
+        <option value="desc">降順</option>
+    </select>
+
 @stop
 
 @section('content')
@@ -56,6 +71,10 @@
                 </div>
             </div>
         </div>
+        <div class="container-fluid text-center col-md-2 col-md-offset-5">
+            {{ $items->links() }}
+        </div>
+
     </div>
 @stop
 
