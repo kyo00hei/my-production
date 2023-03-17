@@ -3,7 +3,8 @@
 @section('title', '商品一覧')
 
 @section('content_header')
-    <h1>商品一覧</h1>
+    <h1>My登録一覧</h1>
+    <h3>ID:{{Auth::user()->id}}</h3>
 
     <!--検索フォーム-->
     <div class="search text-right mb-3">
@@ -12,7 +13,7 @@
             <button type="submit" class="btn btn-dark">検索</button>
         </form>
     </div>
-    
+
     <!--並び替え-->
     <select name="narabi">
         <option value="asc">昇順</option>
