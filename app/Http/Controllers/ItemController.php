@@ -43,6 +43,28 @@ class ItemController extends Controller
 
 
     /**
+     * my商品一覧
+     */
+    public function mylist(Request $request){
+        //userが保持するitemsを取得
+        $items = $request->user()->items()->paginate(5);
+
+        if(!empty($request->keyword)){  //keywordがあるとき
+            $user_id = Auth::id();
+            $items =Item::where('user_id', '=' ,"$user_id")
+                    ->where(function($query) use($request) {
+                    $query->where('name','LIKE',"%{$request->keyword}%")
+                    ->orWhere('detail','LIKE',"%{$request->keyword}%")
+                    ->orWhere('type','LIKE',"%{$request->keyword}%");
+            })
+            ->paginate(5);
+        }
+
+        return view('item.mylist', compact('items'));
+    }
+
+
+    /**
      * 商品登録
      */
     public function add(Request $request)

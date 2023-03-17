@@ -231,6 +231,12 @@ return [
             'icon' => 'fas fa-gamepad',
         ],
 
+        [
+            'text' => 'my登録一覧',
+            'url'  => 'items/mylist',
+            'icon' => 'fas fa-user',
+        ],
+
         // AdminLTEデフォルト
         /*
         // Navbar items:
