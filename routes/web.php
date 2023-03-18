@@ -25,12 +25,20 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::prefix('items')->group(function () {
     //一覧画面
     Route::get('/', [App\Http\Controllers\ItemController::class, 'index'])->name('index');
+
     //my一覧画面
     Route::get('/mylist', [App\Http\Controllers\ItemController::class, 'mylist'])->name('mylist');
+
+    //在庫一覧
+    Route::get('/inventory', [App\Http\Controllers\ItemController::class, 'inventory'])->name('inventory');
+    //在庫数変更機能
+    Route::put('/inventory/{id}', [App\Http\Controllers\ItemController::class, 'inventory_update'])->name('inventory.update');
+
     //商品登録画面
     Route::get('/add', [App\Http\Controllers\ItemController::class, 'add'])->name('add');
     //登録機能
     Route::post('/add', [App\Http\Controllers\ItemController::class, 'add'])->name('store');
+    
     //編集画面
     Route::get('/edit/{id}', [App\Http\Controllers\ItemController::class, 'edit'])->name('edit');
     //編集実行

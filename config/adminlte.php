@@ -237,6 +237,12 @@ return [
             'icon' => 'fas fa-user',
         ],
 
+        [
+            'text' => '在庫一覧',
+            'url'  => 'items/inventory',
+            'icon' => 'fas fa-list-alt',
+        ],
+
         // AdminLTEデフォルト
         /*
         // Navbar items:
