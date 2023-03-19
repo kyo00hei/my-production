@@ -41,70 +41,7 @@ class ItemController extends Controller
         return view('item.index', compact('items'));
     }
 
-
-    /**
-     * my商品一覧
-     */
-    public function mylist(Request $request){
-        //userが保持するitemsを取得
-        $items = $request->user()->items()->paginate(5);
-
-        if(!empty($request->keyword)){  //keywordがあるとき
-            $user_id = Auth::id();
-            $items =Item::where('user_id', '=' ,"$user_id")
-                    ->where(function($query) use($request) {
-                    $query->where('name','LIKE',"%{$request->keyword}%")
-                    ->orWhere('detail','LIKE',"%{$request->keyword}%")
-                    ->orWhere('type','LIKE',"%{$request->keyword}%");
-            })
-            ->paginate(5);
-        }
-
-        return view('item.mylist', compact('items'));
-    }
-
-    /**
-     * 在庫一覧
-     */
-    public function inventory(Request $request)
-    {
-        // 在庫商品一覧取得
-        $items = Item
-            ::where('items.status', 'active')
-            ->select()
-            ->paginate(20);  //ページネーション
-
-        //検索機能
-        if(!empty($request->keyword)){  //keywordがあるとき
-            $items = Item::query()
-            ->where('name','LIKE',"%{$request->keyword}%")
-            ->orWhere('detail','LIKE',"%{$request->keyword}%")
-            ->orWhere('type','LIKE',"%{$request->keyword}%")
-            ->paginate(20);
-        }
-
-        return view('item.inventory', compact('items'));
-
-       
-    }
-
-        /**
-         * 在庫数変更機能
-         */
-        public function inventory_update(Request $request){
-
-            $item = Item::find($request->id);
-            $item->inventory = $request->inventory;
-            $item->save();
-
-            $items = Item
-            ::where('items.status', 'active')
-            ->select()
-            ->paginate(20);
-
-            return view('item.inventory', compact('items'));
-        }
-
+    
     /**
      * 商品登録
      */
