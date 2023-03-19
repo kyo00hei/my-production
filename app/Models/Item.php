@@ -16,6 +16,7 @@ class Item extends Model
         'name',
         'type',
         'detail',
+        'inventory', //入庫、売り上げのデータを取ってきて入れるカラム
     ];
 
     /**

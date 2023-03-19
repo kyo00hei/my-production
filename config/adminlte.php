@@ -233,8 +233,14 @@ return [
 
         [
             'text' => 'my登録一覧',
-            'url'  => 'items/mylist',
+            'url'  => 'mylist',
             'icon' => 'fas fa-user',
+        ],
+
+        [
+            'text' => '在庫一覧',
+            'url'  => 'inventory',
+            'icon' => 'fas fa-list-alt',
         ],
 
         // AdminLTEデフォルト

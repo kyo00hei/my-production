@@ -1,0 +1,81 @@
+@extends('adminlte::page')
+
+@section('title', '商品一覧')
+
+@section('content_header')
+    <h1>在庫一覧</h1>
+
+    <!--検索フォーム-->
+    <div class="search text-right mb-3">
+        <form action="">
+            <input type="text" name="keyword"  placeholder="商品検索">
+            <button type="submit" class="btn btn-dark">検索</button>
+        </form>
+    </div>
+    
+    <!--並び替え-->
+    <select name="narabi">
+        <option value="asc">昇順</option>
+        <option value="desc">降順</option>
+    </select>
+
+@stop
+
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">商品一覧</h3>
+                    <div class="card-tools">
+                        
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>名前</th>
+                                <th>種別</th>
+                                <th>詳細</th>
+                                <th>
+                                    <div class="pl-5">在庫数</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($items as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->type }}</td>
+                                    <td>{{ $item->detail }}</td>
+                                    <td>
+                                        <form method="POST" action="{{ route('inventory.update', $item->id) }}" class="inventory pl-5">
+                                            @method('put')
+                                            @csrf
+                                            <input type="number" class="row-g3 w-25" name="inventory" placeholder="個数" value="{{ $item->inventory}}">
+                                            <button type="submit" class="btn btn-outline-info btn-sm">変更</button>
+                                        </form>
+                                    </td>
+                                    
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid text-center col-md-2 col-md-offset-5">
+            {{ $items->links() }}
+        </div>
+
+    </div>
+@stop
+
+@section('css')
+@stop
+
+@section('js')
+@stop
