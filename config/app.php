@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class, //ソート条件でのpaginate反映の追加
+
     ],
 
     /*

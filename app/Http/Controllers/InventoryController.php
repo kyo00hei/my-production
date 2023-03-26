@@ -31,19 +31,18 @@ class InventoryController extends Controller
         // 在庫商品一覧取得
         $items = Item
             ::where('items.status', 'active')
-            ->select()
-            ->paginate(20);  //ページネーション
-
+            ->select();
 
          //検索機能
          if(!empty($request->keyword)){  //keywordがあるとき
             $items = Item::query()
             ->where('name','LIKE',"%{$request->keyword}%")
             ->orWhere('detail','LIKE',"%{$request->keyword}%")
-            ->orWhere('type','LIKE',"%{$request->keyword}%")
-            ->paginate(20);
+            ->orWhere('type','LIKE',"%{$request->keyword}%");
 
         } 
+
+        $items = $items->sortable()->paginate(20);
 
         return view('inventory.index', compact('items'));
 

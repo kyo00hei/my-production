@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Kyslik\ColumnSortable\Sortable; // ソート条件でのpaginate反映の追加
+
 class Item extends Model
 {
     /**
@@ -18,6 +20,14 @@ class Item extends Model
         'detail',
         'inventory', //入庫、売り上げのデータを取ってきて入れるカラム
     ];
+    
+    /**
+     * ソート条件をpaginate反映の追加
+     */
+    use Sortable;
+    public $sortable = ['id', 'name', 'type', 'detail','inventory']; //表示させるカラム
+
+
 
     /**
      * The attributes that should be hidden for serialization.

@@ -27,7 +27,7 @@ class MylistController extends Controller
      */
     public function index(Request $request){
         //userが保持するitemsを取得
-        $items = $request->user()->items()->paginate(5);
+        $items = $request->user()->items();
 
         if(!empty($request->keyword)){  //keywordがあるとき
             $user_id = Auth::id();
@@ -36,9 +36,11 @@ class MylistController extends Controller
                     $query->where('name','LIKE',"%{$request->keyword}%")
                     ->orWhere('detail','LIKE',"%{$request->keyword}%")
                     ->orWhere('type','LIKE',"%{$request->keyword}%");
-            })
-            ->paginate(5);
+            });
+            
         }
+
+        $items = $items->sortable()->paginate(5);
 
         return view('mylist.index', compact('items'));
     }

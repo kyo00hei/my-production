@@ -26,7 +26,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::prefix('items')->group(function () {
     //一覧画面
     Route::get('/', [App\Http\Controllers\ItemController::class, 'index'])->name('index');
-
     //商品登録画面
     Route::get('/add', [App\Http\Controllers\ItemController::class, 'add'])->name('add');
     //登録機能
