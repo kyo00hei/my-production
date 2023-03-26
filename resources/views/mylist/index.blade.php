@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1>My登録一覧</h1>
-    <h3>ID:{{Auth::user()->id}}</h3>
+    <h3>ID:{{Auth::user()->id}}/{{Auth::user()->name}}</h3>
 
     <!--検索フォーム-->
     <div class="search text-right mb-3">
@@ -15,10 +15,9 @@
     </div>
 
     <!--並び替え-->
-    <select name="narabi">
-        <option value="asc">昇順</option>
-        <option value="desc">降順</option>
-    </select>
+    <div class="sort-tag text-right">
+        @sortablelink('id','ID')/@sortablelink('name','名前')/@sortablelink('type','種類')/@sortablelink('detail','詳細')
+    </div>
 
 @stop
 
@@ -73,7 +72,7 @@
             </div>
         </div>
         <div class="container-fluid text-center col-md-2 col-md-offset-5">
-            {{ $items->links() }}
+        {{ $items->appends(request()->query())->links() }}
         </div>
 
     </div>

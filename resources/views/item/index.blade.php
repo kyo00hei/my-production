@@ -7,17 +7,18 @@
 
     <!--検索フォーム-->
     <div class="search text-right mb-3">
-        <form action="">
+        <form action="" method="GET">
             <input type="text" name="keyword"  placeholder="商品検索">
             <button type="submit" class="btn btn-dark">検索</button>
         </form>
     </div>
     
-    <!--並び替え-->
-    <select name="narabi">
-        <option value="asc">昇順</option>
-        <option value="desc">降順</option>
-    </select>
+<!--並び替え-->
+<div class="sort-tag text-right">
+    @sortablelink('id','ID')/@sortablelink('name','名前')/@sortablelink('type','種類')/@sortablelink('detail','詳細')
+</div>
+
+
 
 @stop
 
@@ -41,7 +42,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>名前</th>
-                                <th>種別</th>
+                                <th>種類</th>
                                 <th>詳細</th>
                                 <th></th>
                                 <th></th>
@@ -72,7 +73,7 @@
             </div>
         </div>
         <div class="container-fluid text-center col-md-2 col-md-offset-5">
-            {{ $items->links() }}
+            {{ $items->appends(request()->query())->links() }} 
         </div>
 
     </div>
