@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\Item;
 
+use App\Models\Log;
+
 class InventoryController extends Controller
 {
     /**
@@ -57,7 +59,17 @@ class InventoryController extends Controller
             $item->inventory = $request->inventory;
             $item->save();
 
+             //log機能(商品在庫)
+            Log::create([
+                'user_id' => Auth::user()->id,
+                'user_name' => Auth::user()->name,
+                'item_name' => $item->name,
+                'action' => '4',
+                'description'=> (Auth::user()->name).'さんが商品：'.($item->name).'の在庫数を更新しました'
+            ]);
+
             return back()->withInput();
+
         }
 
 }
