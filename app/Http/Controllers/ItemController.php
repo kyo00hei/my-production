@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use App\Models\Log;
+
 
 class ItemController extends Controller
 {
@@ -64,6 +66,16 @@ class ItemController extends Controller
                 'detail' => $request->detail,
             ]);
 
+            //log機能(商品登録)
+            Log::create([
+                'user_id' => Auth::user()->id,
+                'user_name' => Auth::user()->name,
+                'item_name' => $request->name,
+                'action' => '1',
+                'description'=> (Auth::user()->name).'さんが商品：'.($request->name).'を登録しました'
+            ]);
+
+
             return redirect('/items');
         }
         return view('item.add');
@@ -89,6 +101,15 @@ class ItemController extends Controller
             $item->detail = $request->detail;
             $item->save();
 
+            //log機能(商品編集)
+            Log::create([
+                'user_id' => Auth::user()->id,
+                'user_name' => Auth::user()->name,
+                'item_name' => $request->name,
+                'action' => '2',
+                'description'=> (Auth::user()->name).'さんが商品：'.($request->name).'を編集しました'
+            ]);
+
             return redirect('/items');
         }
 
@@ -103,7 +124,20 @@ class ItemController extends Controller
     public function destroy(Request $request){
 
         $item = Item::find($request->id);
+
+        //log機能(商品削除)
+        Log::create([
+            'user_id' => Auth::user()->id,
+            'user_name' => Auth::user()->name,
+            'item_name' => $item->name,
+            'action' => '3',
+            'description'=> (Auth::user()->name).'さんが商品：'.($item->name).'を削除しました'
+        ]);
+
+        
         $item->delete();
+
+        
 
         return redirect('/items');
     }

@@ -5,6 +5,7 @@
 @section('content_header')
     <h1>商品一覧</h1>
 
+
     <!--検索フォーム-->
     <div class="search text-right mb-3">
         <form action="" method="GET">
