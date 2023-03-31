@@ -22,8 +22,9 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //nameにitemsは無し
+//商品管理権限はroleが１～１０
 //商品一覧
-Route::prefix('items')->group(function () {
+Route::middleware(['auth','can:admin-higher'])->prefix('items')->group(function(){
     //一覧画面
     Route::get('/', [App\Http\Controllers\ItemController::class, 'index'])->name('index');
     //商品登録画面
@@ -39,18 +40,29 @@ Route::prefix('items')->group(function () {
     Route::delete('/destroy/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('destroy');
 });
 
-//my一覧
-Route::prefix('mylist')->group(function () {
+//my商品一覧
+Route::middleware(['auth','can:admin-higher'])->prefix('mylist')->group(function () {
 
-    //my一覧画面
+    //my商品一覧画面
     Route::get('/', [App\Http\Controllers\MylistController::class, 'index'])->name('mylist');
 });
 
-//在庫
-Route::prefix('inventory')->group(function () {
-    //在庫一覧
+//在庫一覧
+Route::middleware(['auth','can:admin-higher'])->prefix('inventory')->group(function () {
+    //在庫一覧画面
     Route::get('/', [App\Http\Controllers\InventoryController::class, 'index'])->name('inventory');
     //在庫数変更機能
     Route::get('/{id}', [App\Http\Controllers\InventoryController::class, 'index'])->name('inventory.update');
     Route::put('/{id}', [App\Http\Controllers\InventoryController::class, 'update'])->name('inventory.update');
+});
+
+//管理者権限一覧
+Route::middleware(['auth','can:admin-higher'])->prefix('users')->group(function () {
+    //user一覧画面
+    Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('index');
+    //user権限付与
+    Route::get('/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+    Route::put('/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
+    //削除機能
+    Route::delete('/destroy/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
 });

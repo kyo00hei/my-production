@@ -243,6 +243,12 @@ return [
             'icon' => 'fas fa-list-alt',
         ],
 
+        [
+            'text' => '管理権限',
+            'url'  => 'users',
+            'icon' => 'fas fa-child',
+        ],
+
         // AdminLTEデフォルト
         /*
         // Navbar items:
