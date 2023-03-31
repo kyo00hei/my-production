@@ -32,7 +32,11 @@
 
                         <div class="form-group">
                             <label for="type">種別</label>
-                            <input type="number" class="form-control" id="type" name="type" placeholder="1, 2, 3, ..." value="{{$item->type}}">
+                            <select name="type" class="form-control" placeholder="種別">
+                                @foreach(config('type') as $type => $type_id)
+                                    <option value="{{ $type }}">{{ $type_id }}</option>
+                                @endforeach  
+                            </select>
                         </div>
 
                         <div class="form-group">

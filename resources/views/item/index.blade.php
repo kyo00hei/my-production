@@ -54,7 +54,14 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->type }}</td>
+                                    <td>
+                                        @foreach(config('type') as $type_value => $type)
+                                            @if($item->type==$type_value)
+                                                {{$type}}
+                                            @endif
+                                        @endforeach
+                                    </td>
+
                                     <td>{{ $item->detail }}</td>
                                     <td>
                                         <a href="{{ route('edit',$item->id)}}" class="btn btn-primary" >編集</a>
