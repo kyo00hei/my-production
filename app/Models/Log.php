@@ -15,6 +15,7 @@ class Log extends Model
         'user_name',
         'item_name',
         'description',
+        'action',
 
     ];
 }
