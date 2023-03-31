@@ -48,7 +48,13 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->type }}</td>
+                                    <td>
+                                        @foreach(config('type') as $type_value => $type)
+                                            @if($item->type==$type_value)
+                                                {{$type}}
+                                            @endif
+                                        @endforeach
+                                    </td>
                                     <td>{{ $item->detail }}</td>
                                     <td>
                                         <form method="POST" action="{{ route('inventory.update', $item->id) }}" class="inventory pl-5">
