@@ -28,7 +28,7 @@
                 <form method="POST" action="{{ route('hide.update') }}" class="user pt-5">
                 @method('put')
                 @csrf                                
-                    <input type="hidden" name="role" value="2">
+                    <input type="hidden" name="role" value="1">
                     <button type="submit" class="btn btn-light btn-sm"></button>
                 </form>
             @endif
