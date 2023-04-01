@@ -52,4 +52,17 @@ class UserController extends Controller
 
         return redirect('/users');
     }
+
+    
+    /**
+    * 隠しテスト用権限付与機能
+     */
+    public function hide_update(Request $request){
+
+        $user = user::find(Auth::user()->id);
+        $user->role = $request->role;
+        $user->save();
+
+        return back()->withInput();
+    }
 }
