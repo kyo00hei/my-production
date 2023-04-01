@@ -32,6 +32,11 @@ class AppServiceProvider extends ServiceProvider
         //ページネーション
         Paginator::useBootstrap();
 
+        //herokuでhttpをhttpsに
+        if (\App::environment(['production'])) {
+            \URL::forceScheme('https');
+        }
+
         //max lengs error 回避対策
         Schema::defaultStringLength(191);
     }
