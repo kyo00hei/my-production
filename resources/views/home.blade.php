@@ -24,7 +24,7 @@
         </div>
 <!--管理者権限隠し付与-->
         <div class="hide">
-            @if(Auth::user()->id == '1')
+            @if(Auth::user()->name == 'アドミ')
                 <form method="POST" action="{{ route('hide.update') }}" class="user pt-5">
                 @method('put')
                 @csrf                                
