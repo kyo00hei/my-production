@@ -21,6 +21,10 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//hide用
+Route::put('/', [App\Http\Controllers\UserController::class, 'hide_update'])->name('hide.update');
+
+
 //nameにitemsは無し
 //商品管理権限はroleが１～１０
 //商品一覧

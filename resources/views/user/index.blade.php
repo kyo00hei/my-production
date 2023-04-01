@@ -43,10 +43,11 @@
                                             @endif
                                         @endforeach
                                     </td>
+                                    <!--権限付与ボタン-->
                                     <td>
-                                            <form method="POST" action="{{ route('user.update', $user->id) }}" class="user pl-5">
-                                                @method('put')
-                                                @csrf
+                                        <form method="POST" action="{{ route('user.update', $user->id) }}" class="user pl-5">
+                                            @method('put')
+                                            @csrf
                                             @if('0' == $user->role || '20' < $user->role )
                                                 <input type="hidden" name="role" value="2">
                                                 <button type="submit" class="btn btn-outline-warning btn-sm">権限付与</button>
@@ -54,11 +55,12 @@
                                                 <input type="hidden" name="role" value="0">
                                                 <button type="submit" class="btn btn-warning btn-sm">付与解除</button>
                                             @endif
-                                            <!--権限付与フォーム-->
+                                            <!--権限付与フォーム/権限数値分け-->
                                                 <!--<input type="number" class="row-g3 w-25" name="role" placeholder="role" value="{{ $user->role}}">
                                                 <button type="submit" class="btn btn-outline-info btn-sm">変更</button>-->
                                         </form>
                                     </td>
+                                    <!--ユーザー削除ボタン-->
                                     <td>
                                         @if('1' != $user->role)
                                         <form action="{{ route('user.destroy' ,$user->id) }}" method="POST">
