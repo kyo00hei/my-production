@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+//max lengs error回避の対策
+use Illuminate\Support\Facades\Schema;
+
 //ページネーション
 use Illuminate\Pagination\Paginator;
 
@@ -28,5 +31,8 @@ class AppServiceProvider extends ServiceProvider
     {
         //ページネーション
         Paginator::useBootstrap();
+
+        //max lengs error 回避対策
+        Schema::defaultStringLength(191);
     }
 }
