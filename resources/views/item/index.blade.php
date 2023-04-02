@@ -5,7 +5,6 @@
 @section('content_header')
     <h1>商品一覧</h1>
 
-
     <!--検索フォーム-->
     <div class="search text-right mb-3">
         <form action="" method="GET">
@@ -14,10 +13,10 @@
         </form>
     </div>
     
-<!--並び替え-->
-<div class="sort-tag text-right">
-    @sortablelink('id','ID')/@sortablelink('name','名前')/@sortablelink('type','種類')/@sortablelink('detail','詳細')
-</div>
+    <!--並び替え-->
+    <div class="sort-tag text-right">
+        @sortablelink('id','ID')/@sortablelink('name','名前')/@sortablelink('type','種類')/@sortablelink('detail','詳細')
+    </div>
 
 
 

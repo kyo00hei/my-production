@@ -31,23 +31,40 @@ class InventoryController extends Controller
     public function index(Request $request)
     {
         // 在庫商品一覧取得
-        $items = Item
-            ::where('items.status', 'active')
-            ->select();
+        $items = Item::where('items.status', 'active')
+                ->select();
 
-         //検索機能
-         if(!empty($request->keyword)){  //keywordがあるとき
-            $items = Item::query()
-            ->where('name','LIKE',"%{$request->keyword}%")
-            ->orWhere('detail','LIKE',"%{$request->keyword}%")
-            ->orWhere('type','LIKE',"%{$request->keyword}%");
+        /**検索機能 */
+        if(!empty($request->keyword)){  //keywordがあるとき
 
+            $keyword = $request->keyword;
+
+            //全角数字→半角数字
+            $keyword_half = mb_convert_kana($keyword, 'n');
+
+            //キーワードがtypeの種類だった場合に数値に変えている
+            foreach(config('type') as $type_value => $type){
+                if($request->keyword == $type){
+                    $keyword = $type_value;
+                }
+            }
+            //キーワードが数値(全角数字は半角数字に変換済み)の時はtypeカラムを検索対象から外す
+            if(is_numeric($keyword_half)){
+                $items = Item::query()
+                        ->where('id','LIKE',"%{$keyword}%")
+                        ->orWhere('name','LIKE',"%{$keyword}%")
+                        ->orWhere('detail','LIKE',"%{$keyword}%");
+
+            //キーワードが数値以外(全角数字)のときはtypeカラムを検索対象に含む
+            }else{
+                $items = Item::query()
+                        ->where('name','LIKE',"%{$keyword}%")
+                        ->orWhere('detail','LIKE',"%{$keyword}%")
+                        ->orWhere('type','LIKE',"%{$keyword}%");
+            }
         } 
-
         $items = $items->sortable()->paginate(20);
-
         return view('inventory.index', compact('items'));
-
     }
 
         /**
