@@ -61,7 +61,7 @@ class ItemController extends Controller
         } 
 
         $items = $items->sortable()->paginate(5);   //ページネーション
-        return view('item.index', compact('items','keyword'));//
+        return view('item.index', compact('items',));
     }
 
 
