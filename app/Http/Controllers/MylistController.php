@@ -50,11 +50,11 @@ class MylistController extends Controller
             if(is_numeric($keyword_half)){
                 $items =Item::where('user_id', '=' ,"$user_id")
                         ->where(function($query) use($keyword) {
-                                $query->where('id','LIKE',"%{$keyword}%")
+                                $query->where('id','LIKE',"%{$keyword_half}%") //id検索時は半角数字
                                 ->orWhere('name','LIKE',"%{$keyword}%")
                                 ->orWhere('detail','LIKE',"%{$keyword}%");
                                 });
-                                
+
             //キーワードが数値以外(全角数字)のときはtypeカラムを検索対象に含む
             }else{
                 $items =Item::where('user_id', '=' ,"$user_id")

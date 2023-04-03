@@ -51,7 +51,7 @@ class InventoryController extends Controller
             //キーワードが数値(全角数字は半角数字に変換済み)の時はtypeカラムを検索対象から外す
             if(is_numeric($keyword_half)){
                 $items = Item::query()
-                        ->where('id','LIKE',"%{$keyword}%")
+                        ->where('id','LIKE',"%{$keyword_half}%") //id検索時は半角数字
                         ->orWhere('name','LIKE',"%{$keyword}%")
                         ->orWhere('detail','LIKE',"%{$keyword}%");
 
@@ -66,7 +66,7 @@ class InventoryController extends Controller
         $items = $items->sortable()->paginate(20);
         return view('inventory.index', compact('items'));
     }
-    
+
         /**
          * 在庫数変更機能
          */
