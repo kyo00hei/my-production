@@ -47,7 +47,7 @@ class ItemController extends Controller
             //キーワードが数値(全角数字は半角数字に変換済み)の時はtypeカラムを検索対象から外す
             if(is_numeric($keyword_half)){
                 $items = Item::query()
-                        ->where('id','LIKE',"%{$keyword}%")
+                        ->where('id','LIKE',"%{$keyword_half}%")
                         ->orWhere('name','LIKE',"%{$keyword}%")
                         ->orWhere('detail','LIKE',"%{$keyword}%");
 
@@ -61,7 +61,7 @@ class ItemController extends Controller
         } 
 
         $items = $items->sortable()->paginate(5);   //ページネーション
-        return view('item.index', compact('items',));
+        return view('item.index', compact('items'));
     }
 
 
