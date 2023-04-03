@@ -54,7 +54,7 @@ class MylistController extends Controller
                                 ->orWhere('name','LIKE',"%{$keyword}%")
                                 ->orWhere('detail','LIKE',"%{$keyword}%");
                                 });
-
+                                
             //キーワードが数値以外(全角数字)のときはtypeカラムを検索対象に含む
             }else{
                 $items =Item::where('user_id', '=' ,"$user_id")

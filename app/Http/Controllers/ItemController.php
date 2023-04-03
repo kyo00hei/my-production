@@ -29,8 +29,6 @@ class ItemController extends Controller
         $items = Item::where('items.status', 'active')
                 ->select();
 
-                //
-                $keyword = 0;
         /**検索機能 */
         if(!empty($request->keyword)){  //keywordがあるとき
             $keyword = $request->keyword;

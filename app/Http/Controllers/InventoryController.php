@@ -66,7 +66,7 @@ class InventoryController extends Controller
         $items = $items->sortable()->paginate(20);
         return view('inventory.index', compact('items'));
     }
-
+    
         /**
          * 在庫数変更機能
          */
