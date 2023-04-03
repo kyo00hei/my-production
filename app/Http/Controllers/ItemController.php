@@ -33,8 +33,7 @@ class ItemController extends Controller
         if(!empty($request->keyword)){  //keywordがあるとき
             $keyword = $request->keyword;
             
-            //全角数字→半角数字
-            $keyword_half = mb_convert_kana($keyword, 'n');
+            
 
             //キーワードがtypeの種類だった場合に数値に変えている
             foreach(config('type') as $type_value => $type){
@@ -45,7 +44,7 @@ class ItemController extends Controller
             }
             
             //キーワードが数値(全角数字は半角数字に変換済み)の時はtypeカラムを検索対象から外す
-            if(is_numeric($keyword_half)){
+            if(is_numeric($keyword)){
                 $items = Item::query()
                         ->where('id','LIKE',"%{$keyword}%")
                         ->orWhere('name','LIKE',"%{$keyword}%")
