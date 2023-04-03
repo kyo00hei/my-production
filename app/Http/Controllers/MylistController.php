@@ -48,9 +48,10 @@ class MylistController extends Controller
                 
             //キーワードが数値(全角数字は半角数字に変換済み)の時はtypeカラムを検索対象から外す
             if(is_numeric($keyword_half)){
+                $keyword = $keyword_half;
                 $items =Item::where('user_id', '=' ,"$user_id")
                         ->where(function($query) use($keyword) {
-                                $query->where('id','LIKE',"%{$keyword_half}%") //id検索時は半角数字
+                                $query->where('id','LIKE',"%{$keyword}%") //id検索時は半角数字
                                 ->orWhere('name','LIKE',"%{$keyword}%")
                                 ->orWhere('detail','LIKE',"%{$keyword}%");
                                 });
