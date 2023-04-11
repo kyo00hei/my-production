@@ -26,7 +26,7 @@ Route::put('/', [App\Http\Controllers\UserController::class, 'hide_update'])->na
 
 
 //nameにitemsは無し
-//商品管理権限はroleが１～１０
+//商品管理権限はroleが1～10
 //商品一覧
 Route::middleware(['auth','can:admin-higher'])->prefix('items')->group(function(){
     //一覧画面
